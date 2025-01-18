@@ -1,2 +1,2 @@
 # Robotics Club - Obstacle Detection Car
-Our first AI & Robotics Club Project
+Our first AI & Robotics Club Project.
