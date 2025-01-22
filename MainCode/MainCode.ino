@@ -159,7 +159,7 @@ void turnLeft() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-  analogWrite(ena, 255); // Full speed
+  analogWrite(ena, 127); // Half speed
   analogWrite(enb, 255); // Full speed
 }
 
@@ -169,5 +169,5 @@ void turnRight() {
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
   analogWrite(ena, 255); // Full speed
-  analogWrite(enb, 255); // Full speed
+  analogWrite(enb, 127); // Half speed
 }
