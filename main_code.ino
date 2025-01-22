@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 // Ultrasonic Sensor Pins
 #define TRIG_PIN 2  // Trigger pin connected to D2
 #define ECHO_PIN 3  // Echo pin connected to D3
