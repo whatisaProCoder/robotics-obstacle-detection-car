@@ -7,10 +7,11 @@ const int buzzerPin = 7; // Buzzer pin
 // Define motor control pins
 const int in1 = 3;  // Left motor control
 const int in2 = 4;  // Left motor control
-const int ena = 5;  // Left motor enable
-const int in3 = 6;  // Right motor control
+const int in3 = 12;  // Right motor control
 const int in4 = 11; // Right motor control
-const int enb = 12; // Right motor enable
+
+// Speed PWM (0 - 255)
+const int speed = 127;
 
 void setup() {
   // Start the serial communication
@@ -29,10 +30,8 @@ void setup() {
   // Set motor control pins as OUTPUT
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
-  pinMode(ena, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  pinMode(enb, OUTPUT);
 }
 
 void loop() {
@@ -86,6 +85,12 @@ void motorControl(float distance) {
     delay(1000); // Turn for a second
     stopMotors();
   } else if (distance >= 20 && distance < 40) {
+    // Turn left or right randomly
+    if (turnDirection == 0) {
+      turnLeft();
+    } else {
+      turnRight();
+    }
     // Turn on LED and Buzzer
     digitalWrite(ledPin, HIGH);
     digitalWrite(buzzerPin, HIGH);
@@ -110,14 +115,13 @@ void motorControl(float distance) {
     delay(100); // Beep duration
     digitalWrite(ledPin, LOW);
     digitalWrite(buzzerPin, LOW);
-
-    // Turn left or right randomly
-    if (turnDirection == 0) {
-      turnLeft();
-    } else {
-      turnRight();
-    }
-    delay(1000); // Turn for a second
+    delay(100); // Pause between beeps
+    digitalWrite(ledPin, HIGH);
+    digitalWrite(buzzerPin, HIGH);
+    delay(100); // Beep duration
+    digitalWrite(ledPin, LOW);
+    digitalWrite(buzzerPin, LOW);
+    delay(100);
     stopMotors();
   } else if (distance >= 40) {
     // Move forward
@@ -132,8 +136,6 @@ void moveForward() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-  analogWrite(ena, 255); // Full speed
-  analogWrite(enb, 255); // Full speed
 }
 
 void stopMotors() {
@@ -141,8 +143,6 @@ void stopMotors() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);
-  analogWrite(ena, 0);
-  analogWrite(enb, 0);
 }
 
 void reverseMotors() {
@@ -150,8 +150,6 @@ void reverseMotors() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
-  analogWrite(ena, 255); // Full speed
-  analogWrite(enb, 255); // Full speed
 }
 
 void turnLeft() {
@@ -159,8 +157,6 @@ void turnLeft() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-  analogWrite(ena, 127); // Half speed
-  analogWrite(enb, 255); // Full speed
 }
 
 void turnRight() {
@@ -168,6 +164,4 @@ void turnRight() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
-  analogWrite(ena, 255); // Full speed
-  analogWrite(enb, 127); // Half speed
 }
