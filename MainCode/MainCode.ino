@@ -10,9 +10,6 @@ const int in2 = 4;  // Left motor control
 const int in3 = 12;  // Right motor control
 const int in4 = 11; // Right motor control
 
-// Speed PWM (0 - 255)
-const int speed = 127;
-
 void setup() {
   // Start the serial communication
   Serial.begin(9600);
