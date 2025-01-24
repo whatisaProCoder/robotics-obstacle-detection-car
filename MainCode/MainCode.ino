@@ -56,7 +56,7 @@ void loop() {
   motorControl(distance);
   
   // Wait for a short period before the next measurement
-  delay(500);
+  delay(100);
 }
 
 void motorControl(float distance) {
