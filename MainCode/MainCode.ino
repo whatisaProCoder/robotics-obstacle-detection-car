@@ -7,8 +7,8 @@ const int buzzerPin = 7; // Buzzer pin
 // Define motor control pins
 const int in1 = 3;  // Left motor control
 const int in2 = 4;  // Left motor control
-const int in3 = 12;  // Right motor control
-const int in4 = 11; // Right motor control
+const int in3 = 11;  // Right motor control
+const int in4 = 12; // Right motor control
 
 void setup() {
   // Start the serial communication
@@ -63,7 +63,7 @@ void motorControl(float distance) {
   // Randomly choose left or right turn
   int turnDirection = random(0, 2); // 0 for left, 1 for right
 
-  if (distance < 20) {
+  if (distance < 10) {
     // Stop the car
     stopMotors();
     digitalWrite(ledPin, LOW);
@@ -81,7 +81,7 @@ void motorControl(float distance) {
     }
     delay(1000); // Turn for a second
     stopMotors();
-  } else if (distance >= 20 && distance < 40) {
+  } else if (distance >= 10 && distance < 20) {
     // Turn left or right randomly
     if (turnDirection == 0) {
       turnLeft();
@@ -120,7 +120,7 @@ void motorControl(float distance) {
     digitalWrite(buzzerPin, LOW);
     delay(100);
     stopMotors();
-  } else if (distance >= 40) {
+  } else if (distance >= 20) {
     // Move forward
     digitalWrite(ledPin, HIGH); // Ensure LED is off when moving forward
     digitalWrite(buzzerPin, LOW); // Ensure Buzzer is off when moving forward
