@@ -1,7 +1,7 @@
 // Define the pins for the HC-SR04 sensor, LED, and Buzzer
 const int trigPin = 9;
 const int echoPin = 10;
-const int ledPin = 8;   // LED pin
+const int ledPin = 13;   // LED pin
 const int buzzerPin = 7; // Buzzer pin
 
 // Define motor control pins
@@ -66,10 +66,10 @@ void motorControl(float distance) {
   if (distance < 20) {
     // Stop the car
     stopMotors();
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(ledPin, LOW);
     digitalWrite(buzzerPin, HIGH);
     delay(1000); // Wait for a second
-    digitalWrite(ledPin, LOW);
+    digitalWrite(ledPin, HIGH);
     digitalWrite(buzzerPin, LOW);
     // Reverse and turn randomly
     reverseMotors();
@@ -122,9 +122,9 @@ void motorControl(float distance) {
     stopMotors();
   } else if (distance >= 40) {
     // Move forward
-    moveForward();
-    digitalWrite(ledPin, LOW); // Ensure LED is off when moving forward
+    digitalWrite(ledPin, HIGH); // Ensure LED is off when moving forward
     digitalWrite(buzzerPin, LOW); // Ensure Buzzer is off when moving forward
+    moveForward();
   }
 }
 
@@ -133,6 +133,7 @@ void moveForward() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
+  Serial.println("Move Forward");
 }
 
 void stopMotors() {
@@ -140,6 +141,7 @@ void stopMotors() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);
+  Serial.println("Stop Movement");
 }
 
 void reverseMotors() {
@@ -147,6 +149,7 @@ void reverseMotors() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
+  Serial.println("Reverse Movement");
 }
 
 void turnLeft() {
@@ -154,6 +157,7 @@ void turnLeft() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
+  Serial.println("Turn Left");
 }
 
 void turnRight() {
@@ -161,4 +165,5 @@ void turnRight() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
+  Serial.println("Turn Right");
 }
